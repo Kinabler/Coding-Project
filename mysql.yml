@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  db-mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_DATABASE=pwn
+      - MYSQL_ROOT_PASSWORD=123
+    ports:
+      - "3307:3306"

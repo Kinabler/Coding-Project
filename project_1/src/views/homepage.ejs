@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/create">Create User</a>
+        <a href="/about">About</a>
+    </div>
+    <div class="table-container">
+        <div class="table-header">Users</div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+
+            <% listUsers.forEach(function(user) { %>
+                <tr>
+                    <td>
+                        <%= user.id %>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                    <td>
+                        <%= user.name %>
+                    </td>
+                    <td>
+                        <%= user.city %>
+                    </td>
+                    <td>
+                        <form>
+                            <button type="submit" formaction="/edit/user/<%= user.id %>" formmethod="GET"
+                                class="edit-button">Edit</button>
+                            <button type="submit" formaction="/delete/user/<%= user.id %>" formmethod="POST"
+                                class="delete-button"
+                                onclick="return confirm('Are you sure you want to delete user: id=<%= user.id %> ?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+</body>
+
+</html>
