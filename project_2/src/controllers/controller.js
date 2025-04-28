@@ -1,4 +1,6 @@
 const pool = require('../configs/database');
+const multer = require('multer');
+
 const { queryCheckConnection, queryGetAllUser, queryCreateUser, queryCheckUserExists, queryGetUserById, queryUpdateUserById, queryDeleteUserById } = require('../services/CRUDService');
 
 // Home Page logical
@@ -71,6 +73,25 @@ const postDeleteUser = async (req, res) => {
     }
 }
 
+// Upload Page logical
+const uploadPage = async (req, res) => {
+    res.render("uploadFilePage");
+}
+
+// const upload = multer().single('profile-pic'); // single file upload
+
+const postUploadFile = async (req, res) => {
+    if (req.fileValidationError) {
+        return res.send(req.fileValidationError);
+    } else if (!req.file) {
+        return res.send("Please select a file to upload");
+    } else if (req.multerError) {
+        return res.send(req.multerError);
+    }
+    // Update the image path to match your static files directory structure
+    res.send(`You have uploaded this file: <hr/><img src="/uploads/${req.file.filename}" width="300"><hr/><a href="/upload">Upload another file</a>`);
+}
+
 // About Page logical
 const getAboutPage = async (req, res) => {
     res.render("aboutPage");
@@ -84,4 +105,6 @@ module.exports = {
     postUpdateUser: postUpdateUser,
     postUpdateUserById: postUpdateUserById,
     postDeleteUser: postDeleteUser,
+    uploadPage: uploadPage,
+    postUploadFile: postUploadFile,
 }
