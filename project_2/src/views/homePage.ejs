@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Add google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="sansation-light">
+    <div class="Navbar">
+        <ul>
+            <li><a class=" active" href="/">Home</a></li>
+            <li><a href="/create-user">Create</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+    <div class="header page">
+        <h1>Welcome to the Home Page</h1>
+        <h2>User's Table List</h2>
+    </div>
+    <div class="table">
+        <table id="users_table">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+            </tr>
+            <% users.forEach(function(user, index) {%>
+                <tr>
+                    <td>
+                        <%= index %>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                    <td>
+                        <%= user.username %>
+                    </td>
+                    <td>
+                        <%= user.password %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>
