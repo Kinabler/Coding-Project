@@ -33,11 +33,12 @@
                 <th>Email</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Action</th>
             </tr>
             <% users.forEach(function(user, index) {%>
                 <tr>
                     <td>
-                        <%= index %>
+                        <%= index+1 %>
                     </td>
                     <td>
                         <%= user.email %>
@@ -47,6 +48,14 @@
                     </td>
                     <td>
                         <%= user.password %>
+                    </td>
+                    <td>
+                        <form class="action-buttons">
+                            <input type="hidden" name="id" value="<%= user.id %>">
+                            <button class="btn btn-edit" formaction="/update" formmethod="POST">Edit</button>
+                            <button class="btn btn-delete" formaction="/delete/user/<%= user.id %>"
+                                formmethod="POST">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 <% }) %>

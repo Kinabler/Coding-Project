@@ -1,5 +1,5 @@
 const pool = require('../configs/database');
-const { queryCheckConnection, queryGetAllUser, queryCreateUser, queryCheckUserExists } = require('../services/CRUDService');
+const { queryCheckConnection, queryGetAllUser, queryCreateUser, queryCheckUserExists, queryGetUserById, queryUpdateUserById, queryDeleteUserById } = require('../services/CRUDService');
 
 // Home Page logical
 const getHomePage = async (req, res) => {
@@ -8,9 +8,9 @@ const getHomePage = async (req, res) => {
     // Get all users from database
     let userData = await queryGetAllUser();
     if (userData.length > 0) {
-        console.log(">>> Get User from Database: OK");
+        console.log(">>> Get All User from Database: OK");
     } else {
-        console.log(">>> Get User from Database: Failed");
+        console.log(">>> Get All User from Database: Failed");
     }
     res.render("homePage", { users: userData });
 }
@@ -27,18 +27,48 @@ const postCreateUser = async (req, res) => {
     let existed = await queryCheckUserExists(email, username);
     if (existed) {
         console.log(">>> User already exists");
-        return res.render("createUserPage", { message: "User already exists" });
+        return res.render("createUserPage", { message: "Email/Username already exists" });
     }
     // Create user
     let result = await queryCreateUser(email, username, password);
     if (result) {
-        console.log(">>> Create User: OK");
         return res.render("createUserPage", { message: "Create User Successfully" });
     } else {
-        console.log(">>> Create User: Failed");
         return res.render("createUserPage", { message: "Create User Failed" });
     }
     res.render("createUserPage", { message: "" });
+}
+
+// Update User Page logical
+const postUpdateUser = async (req, res) => {
+    let userId = req.body.id;
+    let userData = await queryGetUserById(userId);
+    console.log(">>> Get User from Database: OK");
+    res.render("updateUserPage", { user: userData[0] });
+}
+
+// Update User logical
+const postUpdateUserById = async (req, res) => {
+    let { id, email, username, password } = req.body;
+    // Update user
+    let result = await queryUpdateUserById(id, email, username, password);
+    if (result) {
+        return res.send("<script>alert('Update User Successfully'); window.location.href='/';</script>");
+    } else {
+        return res.send("<script>alert('Update User Failed'); window.location.href='/';</script>");
+    }
+}
+
+// Delete User logical
+const postDeleteUser = async (req, res) => {
+    let userId = req.params.id;
+    // Delete user
+    let result = await queryDeleteUserById(userId);
+    if (result) {
+        return res.send("<script>alert('Delete User Successfully'); window.location.href='/';</script>");
+    } else {
+        return res.send("<script>alert('Delete User Failed'); window.location.href='/';</script>");
+    }
 }
 
 // About Page logical
@@ -51,4 +81,7 @@ module.exports = {
     getAboutPage: getAboutPage,
     getCreateUser: getCreateUser,
     postCreateUser: postCreateUser,
+    postUpdateUser: postUpdateUser,
+    postUpdateUserById: postUpdateUserById,
+    postDeleteUser: postDeleteUser,
 }

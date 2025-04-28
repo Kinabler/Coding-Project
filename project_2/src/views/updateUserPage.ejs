@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- Add google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="sansation-light">
+    <div class="Navbar">
+        <ul>
+            <li><a class="active" href="/">Home</a></li>
+            <li><a href="/create-user">Create</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+    <div class="header page">
+        <h1>Update User Form: </h1><br><br>
+        <div class="fieldset-form">
+            <form action="/update/user/<%= user.id %>" method="POST">
+                <fieldset>
+                    <legend>User:</legend>
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= user.email%>"><br><br>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="<%= user.username%>"><br><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" value="<%= user.password%>"><br><br>
+                    <input type="submit" onsubmit="return confirm('Are you want to update new information?')"
+                        value="Update">
+                </fieldset>
+            </form>
+
+        </div>
+</body>
+
+</html>
