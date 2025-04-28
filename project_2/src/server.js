@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const configViewEngine = require('./configs/viewEngine');
 const webRoute = require('./routes/web');
+const apiRoute = require('./routes/api');
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // Route config
 app.use("/", webRoute);
+app.use("/api/v1/", apiRoute);
 
 // Listening on port 8080
 app.listen(port, host, () => {
