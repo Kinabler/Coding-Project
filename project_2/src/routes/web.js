@@ -32,7 +32,7 @@ router.post("/update", postUpdateUser);
 router.post("/update/user/:id", postUpdateUserById);
 router.post("/delete/user/:id", postDeleteUser);
 router.get("/upload", uploadPage);
-router.post("/upload-file", upload.single('profile-pic'), postUploadFile);
+router.post("/upload-file", upload.array('profile-pic', 5), postUploadFile);
 router.get("/about", getAboutPage);
 
 module.exports = router;

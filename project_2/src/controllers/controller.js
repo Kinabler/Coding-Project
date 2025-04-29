@@ -1,3 +1,4 @@
+
 const pool = require('../configs/database');
 const multer = require('multer');
 
@@ -83,13 +84,18 @@ const uploadPage = async (req, res) => {
 const postUploadFile = async (req, res) => {
     if (req.fileValidationError) {
         return res.send(req.fileValidationError);
-    } else if (!req.file) {
+    } else if (!req.files) {
         return res.send("Please select a file to upload");
     } else if (req.multerError) {
         return res.send(req.multerError);
     }
     // Update the image path to match your static files directory structure
-    res.send(`You have uploaded this file: <hr/><img src="/uploads/${req.file.filename}" width="300"><hr/><a href="/upload">Upload another file</a>`);
+    let result = "Here is these files has been uploaded: <hr />";
+    req.files.forEach((file) => {
+        result += `<img src="/uploads/${file.filename}" width="200px" height="200px" />`;
+    });
+    result += "<hr /> <a href='/upload'>Upload more files</a>";
+    return res.send(result);
 }
 
 // About Page logical
