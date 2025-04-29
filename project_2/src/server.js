@@ -3,6 +3,8 @@ const express = require('express');
 const configViewEngine = require('./configs/viewEngine');
 const webRoute = require('./routes/web');
 const apiRoute = require('./routes/api');
+const morgan = require('morgan');
+const fs = require('fs');
 
 
 const app = express();
@@ -16,9 +18,18 @@ configViewEngine(app, express);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-// Route config
+// Init morgan logger
+var accessLogStream = fs.createWriteStream('./src/logs/access.log', { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
+
+// Init web,api routes
 app.use("/", webRoute);
 app.use("/api/v1/", apiRoute);
+
+// Handler Middleware 404 Not Found: Must be placed after all routes
+app.use((req, res) => {
+    return res.render("404Page");
+});
 
 // Listening on port 8080
 app.listen(port, host, () => {
