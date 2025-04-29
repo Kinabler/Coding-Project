@@ -23,7 +23,7 @@ const imageFilter = function (req, file, cb) {
     cb(null, true);
 };
 
-let upload = multer({ storage: storage, fileFilter: imageFilter });
+let upload = multer({ storage: storage, fileFilter: imageFilter }).array('profile-pic', 2); // multiple file upload
 
 router.get("/", getHomePage);
 router.get("/create-user", getCreateUser);
@@ -32,7 +32,17 @@ router.post("/update", postUpdateUser);
 router.post("/update/user/:id", postUpdateUserById);
 router.post("/delete/user/:id", postDeleteUser);
 router.get("/upload", uploadPage);
-router.post("/upload-file", upload.array('profile-pic', 5), postUploadFile);
+router.post("/upload-file", (req, res, next) => {
+    upload(req, res, (err) => {
+        if (err instanceof multer.MulterError && err.code === 'LIMIT_UNEXPECTED_FILE') {
+            res.send("<script>alert('Many file is not allowed!'); window.location.href='/upload';</script>");
+        } else if (err) {
+            res.send(err);
+        } else {
+            next();
+        }
+    });
+}, postUploadFile);
 router.get("/about", getAboutPage);
 
 module.exports = router;
