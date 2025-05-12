@@ -6,6 +6,7 @@ const cors = require('cors');
 const webRoutes = require('./routes/web_routes');
 const apiRoutes = require('./routes/api_routes');
 const configViewEngine = require('./configs/viewEngine');
+const connection = require('./configs/database');
 
 // Init app
 const app = express();
@@ -36,8 +37,15 @@ app.use('/', webRoutes);
 app.use('/api/v1/', apiRoutes);
 
 (async () => {
-    app.listen(port, host, () => {
-        console.log(`Server is running on http://${host}:${port}`);
+    try {
+        // using mongooose
+        await connection();
+        // Listen on port
+        app.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
+        })
+    } catch {
+        console.log("Can not connect to Database");
+    }
 
-    })
 })(); 
