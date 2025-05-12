@@ -2,13 +2,23 @@ const express = require('express');
 require('dotenv').config();
 const morgan = require('morgan');
 const fs = require('fs');
+const cors = require('cors');
 const webRoutes = require('./routes/web_routes');
 const apiRoutes = require('./routes/api_routes');
 const configViewEngine = require('./configs/viewEngine');
 
+// Init app
 const app = express();
 host = process.env.HOST || 'localhost';
 port = process.env.PORT || 8000;
+
+//Config cors
+app.use(cors({
+    origin: process.env.ORIGIN,
+    credentials: true,
+    preflightContinue: true,
+    method: "GET,POST,PUT,DELETE"
+}));
 
 //Configure view engine
 configViewEngine(app, express);
