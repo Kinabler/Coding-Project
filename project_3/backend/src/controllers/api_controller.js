@@ -1,4 +1,4 @@
-const express = require('express');
+const { createUserService } = require('../services/User_CRUDService');
 
 const rootApi = async (req, res) => {
     res.status(200).json({
@@ -8,6 +8,18 @@ const rootApi = async (req, res) => {
     })
 }
 
+const createUser = async (req, res) => {
+    const { email, username, password } = req.body;
+
+    if (!email || !username || !password) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+    const data = await createUserService(email, username, password);
+
+    return res.status(200).json({ data });
+}
+
 module.exports = {
     rootApi: rootApi,
+    createUser: createUser,
 }
