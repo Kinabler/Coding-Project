@@ -97,7 +97,7 @@ const RegisterPage = () => {
 
                     <Form.Item label={null}>
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            Register
                         </Button>
                     </Form.Item>
                 </Form>

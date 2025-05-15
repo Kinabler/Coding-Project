@@ -33,7 +33,7 @@ const loginService = async (email, password) => {
         const userData = await user.findOne({ email: email });
         if (!userData) {
             return {
-                EC: 0,
+                EC: 1,
                 EM: "Email/Password is invalid",
             }
         } else {
@@ -60,13 +60,14 @@ const loginService = async (email, password) => {
                     }
                 )
                 return {
+                    EC: 0,
+                    EM: "Login successful",
                     accessToken,
                     user: {
                         email: userData.email,
                         username: userData.username,
                         role: userData.role,
                     },
-                    message: "Login successful",
                 }
             };
         }

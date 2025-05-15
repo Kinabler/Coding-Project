@@ -20,8 +20,8 @@ const Header = () => {
             key: 'SubMenu',
             icon: <LoginOutlined />,
             children: [
-                { label: 'Login', key: 'login' },
-                { label: <Link to={"/register"}>Register</Link>, key: 'signin' },
+                { label: <Link to={"/login"}>Login</Link >, key: 'login' },
+                { label: <Link to={"/register"}>Register</Link>, key: 'register' },
                 { label: 'Logout', key: 'logout' },
             ],
         },
