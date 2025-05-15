@@ -18,7 +18,7 @@ app.use(cors({
     origin: process.env.ORIGIN,
     credentials: true,
     preflightContinue: true,
-    method: "GET,POST,PUT,DELETE"
+    methods: "GET,POST,PUT,DELETE,OPTIONS"  // Added OPTIONS method
 }));
 
 //Configure view engine
@@ -48,4 +48,4 @@ app.use('/api/v1/', apiRoutes);
         console.log("Can not connect to Database");
     }
 
-})(); 
+})();
