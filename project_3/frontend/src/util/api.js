@@ -1,3 +1,8 @@
+/*
+    This file contains all the API calls to the backend.
+    It uses axios to make the requests and returns the response.
+*/
+
 import axios from './axios.customize';
 
 const createUserApi = (username, email, password) => {
@@ -19,7 +24,13 @@ const loginUserApi = (email, password) => {
     return axios.post(URL_API, data)
 }
 
+const getUsersApi = () => {
+    const URL_API = "/api/v1/user/get-users";
+    return axios.get(URL_API);
+}
+
 export {
     createUserApi,
     loginUserApi,
+    getUsersApi,
 }

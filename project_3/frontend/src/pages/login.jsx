@@ -1,3 +1,7 @@
+/*
+    This file is used to develop frontend for Login Page and Add JWT access Token !!!!
+*/
+
 import React, { useEffect } from 'react';
 import { Button, Checkbox, Form, Input, notification } from 'antd';
 
@@ -33,7 +37,7 @@ const LoginPage = () => {
             });
             // Add a delay before navigation to allow notification to be seen
             setTimeout(() => {
-                navigation('/home');
+                navigation('/user');
             }, 2000);
         } else {
             // Use notification for error

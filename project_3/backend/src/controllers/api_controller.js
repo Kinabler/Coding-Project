@@ -1,4 +1,4 @@
-const { createUserService, loginService } = require('../services/User_CRUDService');
+const { createUserService, loginService, getUsersService } = require('../services/User_CRUDService');
 
 const rootApi = async (req, res) => {
     res.status(200).json({
@@ -30,8 +30,14 @@ const loginUser = async (req, res) => {
     return res.status(200).json({ message });
 }
 
+const getUsers = async (req, res) => {
+    const message = await getUsersService();
+    return res.status(200).json(message);
+}
+
 module.exports = {
     rootApi: rootApi,
     createUser: createUser,
     loginUser: loginUser,
+    getUsers: getUsers,
 }

@@ -1,3 +1,7 @@
+/*
+    This file is used to develop frontend for Home Page!!!!
+*/
+
 import Header from "../components/layout/header";
 import { Outlet } from "react-router-dom";
 const HomePage = () => {

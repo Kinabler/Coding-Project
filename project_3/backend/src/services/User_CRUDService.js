@@ -76,7 +76,19 @@ const loginService = async (email, password) => {
         return error;
     }
 }
+
+const getUsersService = async () => {
+    try {
+        let result = await user.find({}).select("-password -__v");
+        return result;
+    } catch (error) {
+        console.error("Error listing user:", error);
+        return error;
+    }
+}
+
 module.exports = {
     createUserService: createUserService,
     loginService: loginService,
+    getUsersService: getUsersService,
 }
