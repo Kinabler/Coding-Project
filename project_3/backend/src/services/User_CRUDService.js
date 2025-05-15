@@ -14,12 +14,6 @@ const createUserService = async (email, username, password) => {
             password: hashPassword,
             role: "user",
         })
-        // // add message to result
-        // result = {
-        //     message: "User created successfully",
-        //     data: result
-        // }
-
         return result;
     } catch (error) {
         if (error.code === 11000) {
@@ -31,6 +25,34 @@ const createUserService = async (email, username, password) => {
     }
 }
 
+const loginService = async (email, password) => {
+    try {
+        // fetch user by email and return one row
+        const userData = await user.findOne({ email: email });
+        if (!userData) {
+            return {
+                EC: 0,
+                EM: "Email/Password is invalid",
+            }
+        } else {
+            // Compare password
+            const isMatch = await bcrypt.compare(password, userData.password);
+            if (!isMatch) {
+                return {
+                    EC: 2,
+                    EM: "Email/Password is invalid",
+                }
+            } else {
+                // Create JWT access token
+                return "Created JWT access token";
+            }
+        }
+    } catch (error) {
+        console.error("Error finding user:", error);
+        return error;
+    }
+}
 module.exports = {
     createUserService: createUserService,
+    loginService: loginService,
 }
