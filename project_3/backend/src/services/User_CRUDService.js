@@ -14,6 +14,12 @@ const createUserService = async (email, username, password) => {
             password: hashPassword,
             role: "user",
         })
+        // // add message to result
+        // result = {
+        //     message: "User created successfully",
+        //     data: result
+        // }
+
         return result;
     } catch (error) {
         if (error.code === 11000) {

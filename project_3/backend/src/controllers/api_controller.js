@@ -14,9 +14,9 @@ const createUser = async (req, res) => {
     if (!email || !username || !password) {
         return res.status(400).json({ message: "All fields are required" });
     }
-    const data = await createUserService(email, username, password);
+    const message = await createUserService(email, username, password);
 
-    return res.status(200).json({ data });
+    return res.status(200).json({ message });
 }
 
 module.exports = {
