@@ -1,5 +1,7 @@
 const user = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const saltRounds = 10;
 
@@ -43,9 +45,30 @@ const loginService = async (email, password) => {
                     EM: "Email/Password is invalid",
                 }
             } else {
+                const payload = {
+                    id: userData._id,
+                    email: userData.email,
+                    role: userData.role,
+                }
                 // Create JWT access token
-                return "Created JWT access token";
-            }
+                const accessToken = jwt.sign(
+                    payload,
+                    process.env.JWT_SECRET,
+                    {
+                        expiresIn: process.env.JWT_EXPIRES_IN,
+                        algorithm: 'HS256', // Specify the algorithm
+                    }
+                )
+                return {
+                    accessToken,
+                    user: {
+                        email: userData.email,
+                        username: userData.username,
+                        role: userData.role,
+                    },
+                    message: "Login successful",
+                }
+            };
         }
     } catch (error) {
         console.error("Error finding user:", error);
