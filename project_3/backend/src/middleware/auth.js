@@ -22,6 +22,11 @@ const auth = (req, res, next) => {
         try {
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
             // console.log('>>> Token:', decodedToken);
+            req.user = {
+                email: decodedToken.email,
+                username: decodedToken.username,
+                role: decodedToken.role,
+            }
         }
         catch (error) {
             if (error.name === 'TokenExpiredError') {

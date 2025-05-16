@@ -35,9 +35,14 @@ const getUsers = async (req, res) => {
     return res.status(200).json(message);
 }
 
+const getAccount = async (req, res) => {
+    return res.status(200).json(req.user);
+}
+
 module.exports = {
     rootApi: rootApi,
     createUser: createUser,
     loginUser: loginUser,
     getUsers: getUsers,
+    getAccount: getAccount,
 }

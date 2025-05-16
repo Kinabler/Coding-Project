@@ -48,6 +48,7 @@ const loginService = async (email, password) => {
                 const payload = {
                     id: userData._id,
                     email: userData.email,
+                    username: userData.username,
                     role: userData.role,
                 }
                 // Create JWT access token
