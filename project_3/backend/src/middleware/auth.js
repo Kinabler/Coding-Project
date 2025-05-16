@@ -21,7 +21,7 @@ const auth = (req, res, next) => {
         // Verify the token here (e.g., using JWT verification)
         try {
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-            console.log('>>> Token:', decodedToken);
+            // console.log('>>> Token:', decodedToken);
         }
         catch (error) {
             if (error.name === 'TokenExpiredError') {

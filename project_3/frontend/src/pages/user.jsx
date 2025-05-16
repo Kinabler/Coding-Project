@@ -16,19 +16,30 @@ const UserPage = () => {
     // Using useEffect to fetch data when the component mounts
     useEffect(() => {
         const fetchUsers = async () => {
-            const res = await getUsersApi();
-            console.log('Response: ', typeof (res));
-            // Check if response indicates success
-            if (res) {
-                setData(res);
-            } else {
+            try {
+                const res = await getUsersApi();
+                // Check if response is valid and is an array
+                if (res && Array.isArray(res)) {
+                    setData(res);
+                } else {
+                    setData([]); // Ensure data is always an array
+                    notification.error({
+                        message: 'Error',
+                        description: "Unauthorized: Token expired or invalid",
+                    });
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 3000);
+                }
+            } catch (error) {
+                setData([]); // Ensure data is always an array
                 notification.error({
                     message: 'Error',
-                    description: "Error occurred while fetching users",
-                })
+                    description: "Get users failed",
+                });
             }
+        };
 
-        }
         fetchUsers();
     }, []);
 

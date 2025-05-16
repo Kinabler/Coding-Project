@@ -37,7 +37,7 @@ const LoginPage = () => {
             });
             // Add a delay before navigation to allow notification to be seen
             setTimeout(() => {
-                navigation('/user');
+                navigation('/');
             }, 2000);
         } else {
             // Use notification for error

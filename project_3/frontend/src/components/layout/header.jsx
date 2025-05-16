@@ -26,7 +26,14 @@ const Header = () => {
             children: [
                 { label: <Link to={"/login"}>Login</Link >, key: 'login' },
                 { label: <Link to={"/register"}>Register</Link>, key: 'register' },
-                { label: 'Logout', key: 'logout' },
+                {
+                    label: <span onClick={() => {
+                        localStorage.removeItem('accessToken');
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 1000);
+                    }}>Logout</span>, key: 'logout'
+                },
             ],
         },
     ]
