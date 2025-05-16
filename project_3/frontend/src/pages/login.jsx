@@ -2,16 +2,19 @@
     This file is used to develop frontend for Login Page and Add JWT access Token !!!!
 */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Button, Checkbox, Form, Input, notification } from 'antd';
 
 import { loginUserApi } from '../util/api';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../components/context/auth.context';
 
 
 const LoginPage = () => {
     // Using useNavigate hook from react-router-dom to navigate to different routes
     const navigation = useNavigate();
+    // Using useContext to access the AuthContext
+    const { setAuth } = useContext(AuthContext);
 
     useEffect(() => {
         // configure notification if you decide to use it
@@ -35,6 +38,14 @@ const LoginPage = () => {
                 message: 'Login Successful',
                 description: 'You have successfully logged in!',
             });
+            setAuth({
+                isAuthenticated: true,
+                user: {
+                    email: res?.message?.user?.email ?? "",
+                    username: res?.message?.user?.username ?? "",
+                },
+            })
+
             // Add a delay before navigation to allow notification to be seen
             setTimeout(() => {
                 navigation('/');
