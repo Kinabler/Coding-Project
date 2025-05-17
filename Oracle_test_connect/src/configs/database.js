@@ -1,7 +1,6 @@
 const oracle = require('oracledb');
 require('dotenv').config();
 
-// Sử dụng một hàm bất đồng bộ để đảm bảo pool được tạo trước khi export
 async function createPool() {
     try {
         // Set up the Oracle database connection configuration
