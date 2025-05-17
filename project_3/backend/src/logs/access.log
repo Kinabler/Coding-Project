@@ -1026,3 +1026,7 @@
 127.0.0.1 - - [16/May/2025:17:18:14 +0000] "OPTIONS /api/v1/account HTTP/1.1" 200 9 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
 127.0.0.1 - - [16/May/2025:17:18:14 +0000] "GET /api/v1/account HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
 127.0.0.1 - - [16/May/2025:17:18:15 +0000] "GET /api/v1/account HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+127.0.0.1 - - [16/May/2025:17:22:09 +0000] "OPTIONS /api/v1/user/get-users HTTP/1.1" 200 9 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+127.0.0.1 - - [16/May/2025:17:22:09 +0000] "OPTIONS /api/v1/user/get-users HTTP/1.1" 200 9 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+127.0.0.1 - - [16/May/2025:17:22:09 +0000] "GET /api/v1/user/get-users HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+127.0.0.1 - - [16/May/2025:17:22:10 +0000] "GET /api/v1/user/get-users HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
